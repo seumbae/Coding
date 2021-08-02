@@ -2,27 +2,25 @@
 
 using namespace std;
 
-int main(){
-    int location, num=1;
+int main(){ 
+    int location;
 
     cin >> location;
-    int** arr = new int*[location];
 
-    for(int i=0;i<location;i++){
-        arr[i] = new int[location];
-    }
+    int layer=1;
 
-    for(int i=0;i<location;i++){
-        for(int j=0;j<=i;j++){
-            arr[i][j] = num++;
+    while(true){
+        if(location <= layer*(layer+1)/2){
+            int r = (location - (layer*(layer-1)/2));
+            if(layer%2 == 0){
+                cout << r << "/" << layer-r+1;
+                break;
+            }
+            else{
+                cout << layer-r+1 << "/" << r;
+                break;
+            }
         }
+        layer++;
     }
-
-    for(int i=0;i<location;i++){
-        for(int j=0;j<=i;j++){
-            cout << arr[i][j];
-        }
-        cout << endl;
-    }
-
 }
