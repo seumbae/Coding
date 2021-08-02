@@ -11,13 +11,13 @@ int main(){
 
     while(true){
         if(location <= layer*(layer+1)/2){
-            int r = (location - (layer*(layer-1)/2));
+            int ans = (location - (layer*(layer-1)/2));
             if(layer%2 == 0){
-                cout << r << "/" << layer-r+1;
+                cout << ans << "/" << layer-ans+1;
                 break;
             }
             else{
-                cout << layer-r+1 << "/" << r;
+                cout << layer-ans+1 << "/" << ans;
                 break;
             }
         }
