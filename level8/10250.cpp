@@ -22,10 +22,3 @@ int main(){
         cout << ans << endl;
     }
 }
-
-/* (N-1)%H + 1)*100 + ((N-1)/H + 1
-
-int ho = ceil(double(n) / double(h));
-		int cheung = n % h;
-
-		if (cheung == 0) cheung = h; */
