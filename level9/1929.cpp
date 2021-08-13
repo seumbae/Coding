@@ -1,22 +1,30 @@
 #include<iostream>
-#include<vector>
-
+#include<cmath>
 using namespace std;
 
-
-void solve(int m, int n){
-    int *arr = new int[n+1];
-
-    for(int i=0; i<n+1; i++)
-        *(arr+i) = i;
-    
-        
-}
-
 int main(){
-    int a, b;
-    cin >> a >> b;
+    int m, n;
+    cin >> m >> n;
+    int arr[n+1];
+    
+    for(int i=0; i<n+1; i++){
+        if(i == 0 || i== 1){
+            *(arr+i) = 0;
+            continue;
+        }
+        *(arr+i) = i;
+    }
 
-    solve(a, b);
+    for(int i=2; i<=sqrt(n+1); i++){
+        if(*(arr+i) == 0)   continue;
+        for(int j=2*i; j<n+1; j+=i){
+            arr[j] = 0;
+        }
+    }
+    
+    for(int i=m; i<n+1; i++){
+        if(*(arr+i))
+            cout << *(arr+i) << endl;
+    }
 }
 
