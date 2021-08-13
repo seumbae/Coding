@@ -24,7 +24,7 @@ int main(){
     
     for(int i=m; i<n+1; i++){
         if(*(arr+i))
-            cout << *(arr+i) << endl;
+            cout << *(arr+i) << '\n';
     }
 }
 
