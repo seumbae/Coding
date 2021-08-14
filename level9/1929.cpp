@@ -2,11 +2,10 @@
 #include<cmath>
 using namespace std;
 
-int main(){
-    int m, n;
-    cin >> m >> n;
-    int arr[n+1];
-    
+
+void solve(int m, int n){
+    int *arr = new int[n+1];
+
     for(int i=0; i<n+1; i++){
         if(i == 0 || i== 1){
             *(arr+i) = 0;
@@ -26,5 +25,13 @@ int main(){
         if(*(arr+i))
             cout << *(arr+i) << '\n';
     }
+
+        
 }
 
+int main(){
+    int a, b;
+    cin >> a >> b;
+
+    solve(a, b);
+}
