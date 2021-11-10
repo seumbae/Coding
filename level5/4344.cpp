@@ -1,33 +1,31 @@
 #include<iostream>
-#include<cstring>
+#include<algorithm>
 
 using namespace std;
 
 int main(){
-    int n;
+    int test;
+    cin >> test;
 
-    cin >> n;
-
-    for(int i=0;i<n;i++){
-        int student;
-        cin >> student;
-
-        int* arr = new int[student];
-        int sum=0;
-        for(int j=0;j<student;j++){
-            cin >> arr[j];
-            sum += *(arr+j);
+    for(int i=0; i<test; i++){
+        int stNum;
+        double avg = 0;
+        cin >> stNum;
+        
+        int *st = new int[stNum];
+        for(int j=0; j<stNum; j++){
+            cin >> *(st + j);
+            avg += *(st+j);
         }
-        double avg = double(sum)/student;
-        int cnt=0;
-
-        for(int j=0;j<student;j++){
-            if(avg < *(arr+j))
-                cnt++;
+        avg /= stNum;
+        double ans =0;
+        for(int j=0; j<stNum; j++){
+            if(*(st+j) > avg)
+                ans++;
         }
+        ans = ans/stNum*100;
         cout << fixed;
         cout.precision(3);
-        cout << double(cnt)/student*100 << "%" << endl;
-
+        cout << ans << "%\n"; 
     }
 }
