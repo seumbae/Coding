@@ -1,28 +1,20 @@
-#include <iostream>
-#include <algorithm>
+#include<iostream>
+#include<algorithm>
 
 using namespace std;
 
 int main(){
-    int len;
+    int n;
+    cin >> n;
 
-    cin >> len;
+    int *arr = new int[n];
+    for(int i=0; i<n; i++)
+        cin >> *(arr+i);
 
-    // dynamic allocation
-    int *arr = new int[len]; 
+    int maxElem = *max_element(arr, arr+n);
+    int minElem = *min_element(arr, arr+n);
 
-    for(int i=0;i < len;i++)
-        cin >> arr[i];
+    cout << minElem << " " << maxElem << endl;
 
-    int small=arr[0], large=arr[0];
-    for(int i=1; i < len; i++){
-        small = min(small,arr[i]);
-        large = max(large,arr[i]);
-    }
-
-    cout << small << " " << large;
-
-    // dynamic allocation delete
     delete[] arr;
-    
 }
