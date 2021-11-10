@@ -3,17 +3,17 @@
 using namespace std;
 
 int main(){
-    int ans, a, b, c, arr[10]={};
+    int *elem = new int[10];
+    fill(elem, elem+10, 0);
 
+    int a,b,c;
     cin >> a >> b >> c;
-    ans = a*b*c;
-
-    while(ans){
-        arr[ans%10]++;
-        ans /=10;
-    }
+    int ans = a*b*c;
     
-    //range based for
-    for(int i : arr)
-        cout << i << endl;
+    while(ans){
+        elem[ans%10]++;
+        ans /= 10;
+    }
+    for(int i=0; i<10; i++)
+        cout << *(elem+i) << "\n";
 }
