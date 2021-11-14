@@ -1,21 +1,16 @@
 #include<iostream>
+#include<algorithm>
 
 using namespace std;
 
 int main(){
-    int arr[9],idx,max;
+    int *elem = new int[9];
 
-    for(int i=0;i < 9;i++)
-        cin >> arr[i];
+    for(int i=0; i<9; i++)
+        cin >> *(elem+i);
+    int maxElem = *max_element(elem, elem+9);
+    auto pos = find(elem, elem+9, maxElem);
     
-    max = arr[0];
-    idx = 0;
-
-    for(int i=1; i < 9; i++){
-        if(arr[i] > max){
-            max = arr[i];
-            idx = i;
-        }
-    }
-    cout << max << "\n" << idx+1;
+    //if (pos != end(elem))
+    cout << maxElem << " " <<  distance(elem, pos)+1 << endl;
 }

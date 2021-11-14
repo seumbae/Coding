@@ -4,24 +4,22 @@
 using namespace std;
 
 int main(){
-    int len;
-    cin >> len;
+    int n;
+    cin >> n;
+    double *score = new double[n];
 
-    double *arr = new double[len];
-    double avg = 0;
-
-    for(int i=0; i<len; i++)
-        cin >> arr[i];
+    for(int i=0; i<n; i++)
+        cin >> *(score+i);
     
-    double maxVal = *max_element(arr, arr+len);
-
-    for(int i=0;i <len ;i++){
-        arr[i] = arr[i]/maxVal * 100;
-        avg += arr[i]/len;
+    double max = *max_element(score, score+n);
+    double avg =0;
+    for(int i=0; i<n; i++){
+        *(score+i) = *(score+i)/max*100;
+        avg += *(score+i);
     }
+    cout.precision(8);
+    cout << avg/n;
+    
 
-    //cout.precision(4);
-    cout << avg;
-    
-    
+    delete[] score;
 }

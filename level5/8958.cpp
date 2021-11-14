@@ -4,23 +4,21 @@
 using namespace std;
 
 int main(){
-    int row;
+    int n;
+    cin >> n;
+    char *elem = new char[80];
 
-    cin >> row;
-    char* str = new char[80];
-
-    for(int i=0;i<row;i++){
-        cin >> str;
-        int sum=0, score=0;
-        for(int j=0;j<strlen(str);j++){
-            if(*(str+j) == 'O'){
-                score++;
-                sum += score;
-            }
-            else
-                score = 0;
+    for(int i=0; i<n; i++){
+        cin >> elem;
+        int ans=0, cnt=0;
+        for(int j=0; j<strlen(elem); j++){
+            if(*(elem+i) == 'O')
+                cnt++;
+            else if(*(elem+i) == 'X')
+                cnt=0;
+            ans +=cnt;
         }
-        cout << sum << endl;
+    cout << ans << "\n";
     }
-    
+    delete[] elem;
 }
