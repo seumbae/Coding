@@ -1,4 +1,5 @@
 #include<iostream>
+#include<algorithm>
 
 using namespace std;
 
@@ -81,8 +82,9 @@ int main(){
     for(int i=0; i<n; i++)
         cin >> *(arr+i);
     //quickSort(arr, 0, n-1);
-
-    mergeSort(arr, 0, n-1);
+    //mergeSort(arr, 0, n-1);
+    sort(arr, arr+n);
+    
     for(int i=0; i<n; i++)
         cout << *(arr+i) << "\n";
 }
