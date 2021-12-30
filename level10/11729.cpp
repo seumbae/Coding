@@ -3,16 +3,6 @@
 
 using namespace std;
 
-int calc(int n){
-    int a = 1;
-
-    while(n){
-        a *= 2;
-        n--;
-    }
-    return a-1;
-}
-
 void hanoi(int num, int from, int by, int to){
     if(num == 1){
         cout << from << " " << to << "\n";
