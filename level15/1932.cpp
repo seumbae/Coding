@@ -3,11 +3,6 @@
 
 using namespace std;
 
-int calc(int num){
-    if(num == 1)
-        return 1;
-    return num + calc(num-1);
-}
 int main(){
     int dp[501][501];
     int height;
