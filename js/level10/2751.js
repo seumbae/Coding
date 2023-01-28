@@ -3,10 +3,6 @@ const filePath = process.platform === "linux" ? "/dev/stdin" : "../input.txt";
 const [input, ...numbers] = fs.readFileSync(filePath).toString().trim().split("\n");
 
 /**
- * TODO: Heap
- */
-
-/**
  * O(nlogn) 정렬 알고리즘
  * Tim - Best(n), Avg(nlogn), Worst(nlogn);
  * Quick - Best(nlogn), Avg(nlogn), Worst(n^2), 분할 정복
@@ -17,44 +13,42 @@ const [input, ...numbers] = fs.readFileSync(filePath).toString().trim().split("\
 /**
  * Heap Sort stable(X)
  * Heapify를 거쳐 Max Heap(부모 노드의 값이 자식 노드보다 항상 큰 힙)으로 먼저 변환
- */
+const heapfity = (arr, len, idx) => {
+  let parent = idx;
+  let left = idx*2 + 1;
+  let right = idx*2 + 2;
 
-const heapSort = (arr) => {
-  //heapify
-  for(let i = 1; i < arr.length ; i++){
-    let child = i;
-    do{
-    const parent = Math.floor(child / 2);
-    if(arr[parent] < arr[child]){
-      [arr[parent], arr[child]] = [arr[child], arr[parent]];
-    }
-    child = parent;
-    }while(child);
+  if(left < len && arr[parent] < arr[left]){
+    parent = left;
+  }
+  if(right < len && arr[parent] < arr[right]){
+    parent = right;
   }
 
-  for(let i = arr.length-1; i >= 0; i--){
-    // max heap이기 때문에 root 노드가 가장 값이 커서 맨 뒤로 보낸다. -> 오름차순
-    [arr[i], arr[0]] = [arr[0], arr[i]];
-    
-    let parent = 0 ;
-    let child = 1;
-    do{
-      child = 2*parent + 1;
-      // 자식 중에 더 큰 값 찾기
-      if(child < i-1 && arr[child] < arr[child+1]){
-        child++;
-      }
-      if(child < i && arr[parent] < arr[child]){
-        [arr[parent], arr[child]] = [arr[child], arr[parent]];
-      }
-      parent = child;
-    }while(child < i);
+  if(parent !== idx){
+    [arr[idx], arr[parent]] = [arr[parent], arr[idx]];
+    // 자식이 변경되어 하위 트리에 영향이 있을 수도 있으므로
+    heapfity(arr, len, parent);
   }
-  return arr;
 }
 
-console.log(heapSort(numbers.map(Number)).join('\n'));
+const heapSort = (arr) => {
+  const len = arr.length
+  // first, build max heap
+  for(let i = Math.floor((len / 2) -1); i >= 0; i--){
+    heapfity(arr, len, i);
+  }
 
+  for(let i = len - 1; i >= 0; i--){
+    [arr[i], arr[0]] = [arr[0], arr[i]];
+
+    heapfity(arr, i, 0);
+  }
+
+  return arr;
+}
+console.log(heapSort(numbers.map(Number)).join('\n'));
+ */
 
 /**
  * Merge Sort
