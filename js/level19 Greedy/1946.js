@@ -5,12 +5,15 @@ let T = +input.shift();
 
 for(let i=0; i<T; i++){
   const N = +input.shift();
-  const applicant = input.splice(0, N).map((elem) => elem.split(' ').map(Number)).sort((a, b) => b[0] - a[0]);
+  const applicant = input.splice(0, N).map((elem) => elem.split(' ').map(Number)).sort((a, b) => a[0] - b[0]);
   let ans = N;
-  for(let j=0; j<N-1; j++){ //이 부분에서 시간초과 발생하는 듯
-    for(let k=j+1; k<N; k++){
-      if(applicant[j][1] > applicant[k][1]){ans--; break}
+  
+  let target = applicant[0][1];
+  for(let j=1; j<N; j++){
+    if(applicant[j][1] < target){
+      target = applicant[j][1];
     }
+    else ans--;
   }
   console.log(ans);
 }
