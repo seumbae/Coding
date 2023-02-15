@@ -36,15 +36,14 @@ class Heap {
     while(parent < this.size()){
       let left = parent*2 + 1;
       let right = parent*2 + 2;
-      if(this.size()-1 < left) break;
+      if(this.size() <= left) break;
 
       let idx = parent;
 
-      if(this.heap[left] && this.heap[right]){
-        idx = this.heap[left] < this.heap[right] ? right : left;
-      }
+      if(this.heap[idx] < this.heap[left]) idx = left;
+      if(right < this.size() && this.heap[idx] < this.heap[right]) idx = right;
 
-      if(this.heap[parent] > this.heap[idx]) break;
+      if(idx === parent) break;
 
       this.swap(parent, idx);
       parent = idx;
@@ -58,7 +57,7 @@ let input = require("fs").readFileSync(filePath).toString().trim().split("\n");
 
 const [N, K] = input.shift().split(" ").map(Number);
 
-const Jewels = input.slice(0, N).map((elem) => elem.split(" ").map(Number)).sort((a,b) => {a[0]-b[0];});
+const Jewels = input.slice(0, N).map((elem) => elem.split(" ").map(Number)).sort((a,b) => a[0]-b[0]);
 const Bags = input.slice(N).map(Number).sort((a,b) => a-b);
 
 const heap = new Heap();
