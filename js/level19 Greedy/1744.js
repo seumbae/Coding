@@ -1,44 +1,28 @@
 const filePath = process.platform === "linux" ? "/dev/stdin" : "../input.txt";
 let [N, ...input] = require("fs").readFileSync(filePath).toString().trim().split("\n").map(Number);
 // 반례: https://www.acmicpc.net/board/view/106796
-input.sort((a, b) => {
-  if(a < 0 && b < 0){
-    return b - a;
-  }
-	return a - b;
-});
-console.log(input);
-let ans = 0;
+input.sort((a, b) => a - b);
 
-// 둘다 1이 넘는경우 -> *
-// 한개만 1이 넘는경우 -> +
-// 둘다 1이 넘지 않는경우 -> 0과 음수 ->*, 0과 1 -> +, 음수와 음수 -> *, else-> +
+const zero = input.reduce((acc, curr) => acc + (curr === 0), 0);
+const negative = input.filter((val) => val < 0);
+const positive = input.filter((val) => 1 < val);
+const ans = input.filter((val) => val === 1);
 
-// 무조건 두개씩 뽑으면 안됨.
-while (input.length) {
-	let prev = input.pop();
-	let next = input.pop();
-	if (!next) {
-		ans += prev;
-		break;
-	}
-
-	if (1 < prev && 1 < next) {
-		ans += prev * next;
-	} else if (1 < prev || 1 < next) {
-		ans += prev + next;
-	} else {
-		if (
-			(prev === 0 && next < 0) ||
-			(prev === 0 && next < 0) ||
-			(prev < 0 && next < 0)
-		) {
-			ans += prev * next;
-		}
-		//((prev === 0 && next === 1) || (prev === 1 && next === 0))
-		else {
-			ans += prev + next;
-		}
-	}
+if(negative.length%2){
+  if(!zero) ans.push(negative.pop());
 }
-console.log(ans);
+//음수
+for(let i=0; i<negative.length; i += 2){
+  if(negative[i] && negative[i+1])
+    ans.push(negative[i]*negative[i+1]);
+}
+
+if(positive.length%2){
+  ans.push(positive.shift());
+}
+
+for(let i=0; i<positive.length; i+=2){
+  if(positive[i] && positive[i+1])
+    ans.push(positive[i] * positive[i+1]);
+}
+console.log(ans.reduce((acc, curr) => acc+curr, 0));
