@@ -2,19 +2,26 @@ const filePath = process.platform === "linux" ? "/dev/stdin" : "../input.txt";
 const input = require("fs").readFileSync(filePath).toString().trim().split("\n");
 const N = +input.shift();
 let room = input.map((e) => e.split(' ').map(v=>+v)).sort((a,b) => a[0] - b[0]);
-// TODO: 우선순위 큐 
-
-
+// TODO: Min Heap
+// https://jun-choi-4928.medium.com/javascript%EB%A1%9C-heap-priority-queue-%EA%B5%AC%ED%98%84%ED%95%98%EA%B8%B0-8bc13bf095d9
+console.log(room);
 let ans = 0;
-while(room.length){
-  let target = room.shift();
-  for(let i=0; i<room.length; i++){
-    if(target[1] <= room[i][0]){
-      target = room[i];
-      room.splice(i--, 1); //이거 때문에 시간초과가 뜨는거 같음X 애초에 큰 값이 들어오면 시간초과가 날 수밖에 없음 반복문을 줄여야함
-    }
-  }
-  ans++;
-}
 
+class MinHeap {
+  constructor() {
+    this.store = [];
+  }
+
+  push = (elem) => {
+
+  }
+
+  pop = () => {
+
+  }
+
+  size = () => {
+    return this.store.length;
+  }
+}
 console.log(ans);
