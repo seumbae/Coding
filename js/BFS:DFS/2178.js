@@ -7,11 +7,7 @@ const bfs = (x, y) => {
       const nx = x + dx[i];
       const ny = y + dy[i];
 
-      if(nx < 0 || N <= nx || ny < 0 || M <= ny) continue;
-      if(graph[nx][ny] === 0) continue;
-
-      //first visit
-      if(graph[nx][ny] === 1){
+      if(0 <= nx && nx < N && 0 <= ny && ny < M && graph[nx][ny] === 1) {
         que.push([nx, ny]);
         graph[nx][ny] = graph[x][y]+1;
       }
