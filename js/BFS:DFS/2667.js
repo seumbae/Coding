@@ -19,6 +19,24 @@ const bfs = (x,y, danji) => {
   return cnt;
 }
 
+const dfs = (x, y) => {
+  if(x < 0 || N <= x || y < 0 || N <= y)
+    return false;
+  
+  if(graph[x][y] === 1 && visited[x][y] === false){
+    cnt++;
+    visited[x][y] = true;
+    graph[x][y] = danji;
+    for(let i=0; i<4; i++){
+      const nx = x + dx[i];
+      const ny = y + dy[i];
+      dfs(nx, ny);
+    }
+    return true;
+  }
+  return false;
+}
+
 const filePath = process.platform === "linux" ? "/dev/stdin" : "../input.txt";
 let input = require("fs").readFileSync(filePath).toString().trim().split("\n");
 
@@ -33,13 +51,33 @@ const visited = [...new Array(N)].map(() => []);
 // 상, 하, 좌, 우
 const dx = [-1, 1, 0, 0];
 const dy = [0, 0, -1, 1];
-let danji = 0;
+let danji = 1;
 let ans = [];
-for(let i=0; i<N; i++){
-  for(let j=0; j<N; j++){
-    if(graph[i][j] === 1 && visited[i][j] === false){
-      ans.push(bfs(i, j, ++danji));
-    }
-  }
-}
-console.log(`${danji}\n${ans.sort((a, b) => a-b).join('\n')}`);
+// BFS
+// for(let i=0; i<N; i++){
+//   for(let j=0; j<N; j++){
+//     if(graph[i][j] === 1 && visited[i][j] === false){
+//       ans.push(bfs(i, j, ++danji));
+//     }
+//   }
+// }
+
+// DFS
+// let cnt = 0;
+// for(let i=0; i<N; i++){
+//   for(let j=0; j<N; j++){
+//     if(graph[i][j] === 1 && visited[i][j] === false){
+//       if(dfs(i,j) === true){
+//         danji++;
+//         ans.push(cnt);
+//         cnt = 0;
+//       };
+//     }
+//   }
+// }
+
+//BFS
+// console.log(`${danji}\n${ans.sort((a, b) => a-b).join('\n')}`);
+
+// DFS
+// console.log(`${danji-1}\n${ans.sort((a, b) => a-b).join('\n')}`);
