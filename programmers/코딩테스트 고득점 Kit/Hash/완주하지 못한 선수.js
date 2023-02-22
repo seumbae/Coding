@@ -4,16 +4,17 @@ let [participant, completion] = require("fs").readFileSync(filePath).toString().
 console.log(solution(participant, completion));
 
 function solution(participant, completion) {
-  let answer = ''
+  const map = new Map();
 
-  participant.sort();
-  completion.sort();
   for(let i=0; i<participant.length; i++){
-    if(participant[i] !== completion[i]){
-      ans = participant[i];
-      break;
-    }
+    map.set(participant[i], (map.get(participant[i]) || false) + 1);
   }
-  
-  return answer;
+
+  for(let i=0; i<completion.length; i++){
+    map.set(completion[i], (map.get(completion[i]) || false) - 1);
+  }
+
+  for(let [key, val] of map){
+    if(0 < val) return key
+  } 
 }
