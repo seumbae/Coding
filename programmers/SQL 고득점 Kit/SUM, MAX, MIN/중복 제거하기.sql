@@ -1,0 +1,10 @@
+--CASE 1
+SELECT COUNT(distinct NAME) AS count
+FROM ANIMAL_INS
+WHERE NAME IS NOT NULL
+
+--COUNT 함수는 COUNT(*)인 경우에 NULL을 포함하여 개수를 세고, COUNT(컬럼명)인 경우에는 세지않는다.
+
+-- CASE2
+SELECT COUNT(NAME) AS count
+FROM (SELECT NAME FROM animal_ins GROUP BY NAME) a
