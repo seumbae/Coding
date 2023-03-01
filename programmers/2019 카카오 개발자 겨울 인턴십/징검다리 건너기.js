@@ -11,7 +11,6 @@ const binary = (arr, mid, k) => {
 }
 
 function solution(stones, k) {
-
   let left = 0;
   let right = 200000000;
   // 원소의 가장 큰 값은 2억으로 모든 원소가 2억인 경우 2억명이 통과할 수 있다는 뜻
