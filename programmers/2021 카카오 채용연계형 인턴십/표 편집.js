@@ -1,7 +1,9 @@
-const Node = function(idx, prev) {
-  this.idx = idx;
-  this.prev = prev;
-  this.next = null;
+class Node{
+  constructor(idx){
+      this.idx = idx;
+      this.prev = null;
+      this.next = null;
+  }
 }
 
 function solution(n, k, cmd) {
@@ -9,30 +11,34 @@ function solution(n, k, cmd) {
   
   let root = new Node(0, null);
   let curNode = root;
-  let prevNode = root;
+  let tmpNode = root;
   
   for(let i=1; i<n; i++){
-      const newNode = new Node(i, prevNode);
-      prevNode.next = newNode;
-      prevNode = newNode;
+      const newNode = new Node(i);
+      
+      tmpNode.next = newNode;
+      newNode.prev = tmpNode;
+      tmpNode = newNode;
       
       if(i === k) curNode = newNode;
   }
-  
+
   let trash = [];
   
   cmd.forEach((elem) => {
       const [command, step] = elem.split(' ');
-      
+      let i=0;
       switch(command){
           case 'U':
-              for(let i=0; i<step; i++){
+              while(i<step && curNode.prev){
                   curNode = curNode.prev;
+                  i++
               }
               break;
           case 'D':
-              for(let i=0; i<step; i++){
+              while(i<step && curNode.next){
                   curNode = curNode.next;
+                  i++
               }
               break;
           case 'C':
