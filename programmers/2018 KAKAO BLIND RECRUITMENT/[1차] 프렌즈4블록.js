@@ -15,11 +15,16 @@ function solution(m, n, board) {
   }
   
   const sort = (blocks) => {
-      for(let row = 1; row <m; row++){
-          for(let col =0; col <n ;col++){
-              if(blocks[row][col] === 0 && blocks[row-1][col]){
-                  blocks[row][col] = blocks[row-1][col];
-                  blocks[row-1][col] = 0;
+      for(let col = 0; col <n; col++){
+          for(let row=m-1; row >=0 ;row--){
+              if(blocks[row][col] === 0) continue;
+              
+              for(let i=m-1; i>row; i--){
+                  if(blocks[i][col] === 0){
+                      blocks[i][col] = blocks[row][col];
+                      blocks[row][col] = 0;
+                      break;
+                  }
               }
           }
       }
