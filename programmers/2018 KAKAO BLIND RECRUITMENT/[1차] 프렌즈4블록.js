@@ -6,13 +6,7 @@ function solution(m, n, board) {
   let block;
   let flag;
   
-  const check = (x, y) => {
-      if(x === 2 && y === 0){
-          for(let i=0; i<3; i++){
-          const [nx, ny] = [x + ways[i][0], y + ways[i][1]];
-          console.log('check',arr[nx][ny], nx, ny)
-      }    
-      }
+  const check = (x, y) => {    
       for(let i=0; i<3; i++){
           const [nx, ny] = [x + ways[i][0], y + ways[i][1]];
           if(arr[x][y] !== arr[nx][ny]) return false;
@@ -21,11 +15,11 @@ function solution(m, n, board) {
   }
   
   const sort = (blocks) => {
-      for(let i=0; i<n; i++){
-          for(let j=m-2; j>=0; j--){
-              while(blocks[j][i] !== 0 && blocks[j+1][i] === 0){
-                  [blocks[j+1][i], blocks[j][i]] =  [blocks[j][i], blocks[j+1][i]];
-                  j++;
+      for(let row = 1; row <m; row++){
+          for(let col =0; col <n ;col++){
+              if(blocks[row][col] === 0 && blocks[row-1][col]){
+                  blocks[row][col] = blocks[row-1][col];
+                  blocks[row-1][col] = 0;
               }
           }
       }
@@ -49,8 +43,7 @@ function solution(m, n, board) {
       }
       remove(block);
       sort(arr);
-      console.log(arr)
   }while(block.length);
   
-  return ans;
+  return arr.reduce((acc, curr) => acc + curr.filter(v => !v).length, 0);
 }
