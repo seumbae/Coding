@@ -19,7 +19,7 @@ function solution(lines) {
   
   logs.forEach((log, idx) => {
       const start = log;
-      const end = start+0.999;
+      const end = start+1;
       
       let cnt = 0;
       for(let i=0; i<lines.length; i++){
@@ -32,5 +32,6 @@ function solution(lines) {
       }
       ans = Math.max(ans, cnt);
   })
+  
   return ans;
 }
