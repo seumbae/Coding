@@ -16,19 +16,6 @@ function solution(msg) {
       ans.push(index[w]);
       index[w+c] = Object.keys(index).length +1;
   }
-//     let idx = 27;
-//     let pos = 0;
-//     while(pos !== msg.length){
-//         for(let i=msg.length; i > pos; i--){
-//             let str = msg.substring(pos, i);
-//             if(index[str]){
-//                 ans.push(index[str]);
-//                 pos += str.length;
-//                 msg[i] ? str += msg[i] : null;
-//                 index[str] ? null : index[str] = idx++;
-//             }
-//         }
-//     }
 
   return ans;
 }
