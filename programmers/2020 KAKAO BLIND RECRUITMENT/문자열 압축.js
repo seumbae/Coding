@@ -1,23 +1,42 @@
+
 function solution(s) {
-  var ans = 0;
-  for(let i=1 ; i < s.length; i++){
+    var ans = s.length;
+    for(let i=1 ; i <= Math.floor(s.length/2); i++){
+        let cnt = 1;
+        let str = ''
+
+        for(let j=0; j<s.length; j += i){
+            let cur = s.substring(j, j+i);
+            let next = s.substring(j+i, j+i*2);
+            
+            if(cur === next) cnt++;
+            else{
+                str = 1 < cnt ? str+cnt+cur : str + cur;
+                cnt = 1;
+            }
+        }
+        ans = Math.min(ans, str.length);
+    }
+    return ans;
+}
+
+function solution(s) {
+  var ans = s.length;
+  for(let i=1 ; i <= Math.floor(s.length/2); i++){
       let cnt = 1;
       let zip = s.length;
-      // console.log('i',i)
       for(let j=0; j<s.length; j += i){
-          // console.log(s.substring(j, j+i), s.substring(j+i, j+i*2))
           if(s.substring(j, j+i) === s.substring(j+i, j+i*2)) cnt++;
           else{
               if(1 < cnt){
-                  zip = zip - cnt*i + i + 1
-                  // console.log('cnt', cnt,zip);
+                  // 1 대신에 cnt.toString().length를 더하는 이유는 두자리 이상의 숫자가 나올 수 있기 때문 문자열에서는 10을 길이가2로 판단한다.
+                  zip = zip - cnt*i + i + cnt.toString().length
               }
               cnt = 1;
           }
       }
       
-      if(ans === 0) ans = zip;
-      else ans = Math.min(ans, zip);
+      ans = Math.min(ans, zip);
   }
   return ans;
 }
