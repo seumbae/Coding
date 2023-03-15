@@ -11,15 +11,19 @@ const getCombinations = (arr, num) => {
   return result;
 }
 
-const checkMinimal = (relation, combination) => {
-  const results = combination.filter(v => v.length === 1);
+const checkMinimal = (combination) => {
+  const results = [];
   
-  combination.forEach((elem) => {
-      results.forEach((res) => {
-          if(elem.includes(res)) return;
-      })
-  })
-
+  while(combination.length){
+      results.push(combination[0])
+      
+      combination = combination.reduce((acc, cur) => {
+          const flag = combination[0].every(v => cur.includes(v));
+          if(!flag) acc.push(cur);
+          return acc;
+      },[])
+  }
+  return results
 }
 
 const checkUniq = (relation, combination) => {
@@ -45,5 +49,7 @@ function solution(relation) {
   }
   
   combi = checkUniq(relation, combi);
-  combi = checkMinimal(relation, combi)
+  combi = checkMinimal(combi)
+  
+  return combi.length
 }  
