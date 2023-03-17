@@ -1,52 +1,58 @@
-const makeNode = (elem) => {
-  const node = {
-      x: elem[0][0],
-      y: elem[0][1],
-      idx: elem[1]
-  }
-  return node;
-}
-
 const pre = [], post = [];
+let root;
 
-const preorder = (tree, idx) => {
-  if(tree[idx]){
-      pre.push(tree[idx].idx);
-      preorder(tree, idx*2 +1);
-      preorder(tree, idx*2 +2);
-  }
+const preorder = (tree) => {
+    if(tree){
+        pre.push(tree.index);
+        preorder(tree.left);
+        preorder(tree.right);
+    }
 }
 
-const postorder = (tree, idx) => {
-  if(tree[idx]){
-      postorder(tree, idx*2 +1);
-      postorder(tree, idx*2 +2);
-      post.push(tree[idx].idx);
-  }
+const postorder = (tree) => {
+    if(tree){
+        postorder(tree.left);
+        postorder(tree.right);
+        post.push(tree.index);
+    }
+}
+
+class Node {
+    constructor(idx, x){
+        this.index = idx;
+        this.x = x;
+        this.left = null;
+        this.right = null;
+    }
+}
+
+const insert = (newNode) => {
+    if(!root) root = newNode;
+    else{
+        subinsert(root, newNode);
+    }
+}
+
+const subinsert = (tree,newNode) => {
+    let dir = tree.x < newNode.x ? 'right' : 'left';
+    
+    if(tree[dir] === null) tree[dir] = newNode;
+    else subinsert(tree[dir], newNode)
 }
 
 function solution(nodeinfo) {
-  nodeinfo = nodeinfo.map((elem,idx) => [elem, idx+1]).sort((a, b) => {
-      if(a[0][1] === b[0][1]) return a[0][0] - b[0][0];
-      return b[0][1] - a[0][1];
-  })
-  const tree = [];
-  nodeinfo.forEach((elem) => {
-      const node = makeNode(elem);
-      
-      let parent = 0;
-      let child;
-      while(tree[parent]){
-          if(tree[parent].x < node.x) child = parent*2 + 2;
-          else child = parent*2 + 1;
-          
-          parent = child;
-      }
-      tree[parent] = node;
-  })
-  
-  preorder(tree,0);
-  postorder(tree, 0);
-  
-  return [pre, post];
+    nodeinfo = nodeinfo.map((elem,idx) => [elem[0], elem[1], idx+1]).sort((a, b) => {
+        if(a[1] === b[1]) return a[0] - b[0];
+        return b[1] - a[1];
+    })
+    
+    
+    nodeinfo.forEach(([x, y, idx]) => {
+        const node = new Node(idx, x);
+        insert(node);
+    })
+    preorder(root);
+    postorder(root);
+    
+    return [pre, post];
 }
