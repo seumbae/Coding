@@ -1,0 +1,19 @@
+import sys
+from heapq import heappush, heappop
+
+n, k = map(int, input().split())
+
+jewels = sorted([tuple(map(int, sys.stdin.readline().rstrip().split())) for _ in range(n)], key=lambda x: (x[0], x[1]))
+bags = sorted([int(sys.stdin.readline().rstrip()) for _ in range(k)])
+
+heap = []
+ans = 0
+
+idx = 0
+for bag in bags:
+    while(idx<n and jewels[idx][0] <= bag):
+        heappush(heap, -jewels[idx][1])
+        idx += 1
+    if(heap):
+        ans += -heappop(heap)
+print(ans)
