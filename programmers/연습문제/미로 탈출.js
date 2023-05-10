@@ -43,8 +43,9 @@ function solution(maps) {
     if(leverCnt){
         initVisited();
         let exitCnt = bfs(lever[0], lever[1], 0, 'E');   
-        return leverCnt + exitCnt
+        
+        if(exitCnt) return leverCnt + exitCnt;
+        else return -1
     }
     else return -1;
-
 }
