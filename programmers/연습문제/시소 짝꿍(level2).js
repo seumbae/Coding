@@ -1,17 +1,15 @@
 function solution(weights) {
-    let ans = 0;
-    let len = weights.length;
+    let ans = 0
+    let map = new Map();
+    let ratios = [1, 2/3, 3/4, 1/2];
     
-    for(let i=0; i<len-1; i++){
-        for(let j=i+1; j<len; j++){
-            if(weights[i] === weights[j]) ans++;
-            else if(weights[i] * 2 === weights[j]*3) ans++;
-            else if(weights[i] * 2 === weights[j]*4) ans++;
-            else if(weights[i] * 3 === weights[j]*2) ans++;
-            else if(weights[i] * 3 === weights[j]*4) ans++;
-            else if(weights[i] * 4 === weights[j]*2) ans++;
-            else if(weights[i] * 4 === weights[j]*3) ans++;
-        }
-    }
+    weights.sort((a, b) => a-b)
+    weights.forEach(w => {
+        ratios.forEach(r => {
+            if(map.has(w*r)) ans += map.get(w*r)
+        })
+        map.set(w, (map.get(w) || 0) + 1);
+    })
+
     return ans
 }
