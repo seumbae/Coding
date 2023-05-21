@@ -5,13 +5,6 @@ const gcd = (a, b) => {
     else return gcd(b, a%b)
 }
 
-const check = (arr, a) =>{
-    let cnt = 0 
-    for(let i=0; i<arr.length; i++){
-        if(arr[i]%a === 0) cnt++
-    }
-    return cnt
-}
 
 function solution(arrayA, arrayB) {
     let ans;
@@ -25,10 +18,10 @@ function solution(arrayA, arrayB) {
         b = gcd(b, arrayB[i]);
     }
     if(a < b){
-        if(check(arrayA, b) === 0 && check(arrayB, b) === arrayB.length) return b
+        if(!arrayA.some(e => e%b === 0)) return b
     }
     else if(b < a){
-        if(check(arrayA, a) === arrayA.length && check(arrayB, a) === 0) return a
+        if(!arrayB.some(e => e%a === 0)) return a
     }
     return 0
 }
