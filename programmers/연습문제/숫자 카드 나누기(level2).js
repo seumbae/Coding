@@ -15,8 +15,8 @@ const check = (arr, a) =>{
 
 function solution(arrayA, arrayB) {
     let ans;
-    let a = gcd(arrayA[0], arrayA[1])
-    let b = gcd(arrayB[0], arrayB[1]);
+    let a = 2 <= arrayA.length ? gcd(arrayA[0], arrayA[1]) : arrayA[0]
+    let b = 2 <= arrayB.length ? gcd(arrayB[0], arrayB[1]) : arrayB[0]
     
     for(let i=2; i<arrayA.length; i++){
         a = gcd(a, arrayA[i]);
