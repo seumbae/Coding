@@ -1,15 +1,13 @@
 function solution(elements) {
     let ans = new Set();
+
+    const len = elements.length;
+    elements = elements.concat(elements)
     
-    for(let i=0; i<elements.length; i++){ //몇개인지
-        for(let j=0; j<elements.length; j++){
-            let sum = 0
-            let cnt = 0, k = j
-            while(cnt !== i+1){
-                sum += elements[k]
-                k = (k+1) % elements.length
-                cnt++
-            }
+    for(let pos = 0; pos < len; pos++){
+        let sum = 0
+        for(let j = 0; j<len; j++){
+            sum += elements[pos+j]
             ans.add(sum)
         }
     }
