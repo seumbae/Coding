@@ -10,11 +10,9 @@ const dir = [[-1, 0], [0, 1], [1, 0], [0, -1]]
 let cnt = 0
 let ans = 0
 while(true){
-    // console.log('cur', r, c, d)
-    // if(cnt === 20) break
     if(room[r][c] === 0){
         ans++;
-        room[r][c] = 1
+        room[r][c] = 2
     }
     let flag = false;
     for(let i=0; i<4; i++){
@@ -33,8 +31,7 @@ while(true){
         }
     }
     else{ // 빈칸이 없는 경우
-        //TODO: 후진하고 벽체크하는 부분을 건드려야 할듯
-        let backPos = (d+2) % 4;
+        let backPos = (d+2) % 4; //ok
         let [nx, ny] = [r + dir[backPos][0], c + dir[backPos][1]]
         if(nx < 0 || n <= nx || ny < 0  || m <= ny || room[nx][ny] === 1) break;
         r = nx, c = ny;
