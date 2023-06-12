@@ -1,7 +1,7 @@
 const filePath = process.platform === "linux" ? "/dev/stdin" : "../input.txt";
 let input = +require("fs").readFileSync(filePath).toString().trim();
 
-const dp = new BigInt64Array(input+1)
+const dp = Array(input+1)
 dp[0] = 0n
 dp[1] = 1n
 
