@@ -34,5 +34,4 @@ int main(){
         char ch = 'A' + idx;
         cout << ch;
     }
-    sort()
 }
